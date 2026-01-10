@@ -2,621 +2,104 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
+    <title>VEXOX – Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profiel - Mohammad Janoudi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --gray: #95a5a6;
-            --success: #2ecc71;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.2;
-        }
-
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 30px;
-            backdrop-filter: blur(5px);
-        }
-
-        section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--secondary);
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid var(--secondary);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--secondary);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 80px;
-        }
-
-        .timeline-date {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 60px;
-            text-align: center;
-            background: var(--secondary);
-            color: white;
-            padding: 8px 5px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-category h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-            border-bottom: 2px solid var(--light);
-            padding-bottom: 5px;
-        }
-
-        .skill-item {
-            margin-bottom: 15px;
-        }
-
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .skill-bar {
-            height: 10px;
-            background: var(--light);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .skill-level {
-            height: 100%;
-            background: var(--secondary);
-            border-radius: 5px;
-            transition: width 1s ease-in-out;
-        }
-
-        .languages-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .language-item {
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .language-circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: conic-gradient(var(--secondary) 0% 80%, var(--light) 80% 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            position: relative;
-        }
-
-        .language-circle::before {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .language-circle span {
-            position: relative;
-            z-index: 1;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .language-item h3 {
-            margin-bottom: 5px;
-            color: var(--primary);
-        }
-
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease, color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .social-links a:hover {
-            color: var(--secondary);
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--secondary);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s ease, transform 0.3s ease;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-download {
-            background: var(--success);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 30px auto;
-            width: fit-content;
-        }
-
-        .btn-download:hover {
-            background: #27ae60;
-        }
-
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                padding-left: 60px;
-            }
-            
-            .timeline-date {
-                width: 45px;
-                font-size: 0.8rem;
-            }
-            
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .languages-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .contact-item {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Mohammad Janoudi</h1>
-            <p class="tagline">Software Developer & Web Designer</p>
-            <div class="contact-info">
-                <div class="contact-item"><i class="fas fa-envelope"></i><span>janoudimohammad995@gmail.com</span></div>
-                <div class="contact-item"><i class="fas fa-phone"></i><span>06 20102430</span></div>
-                <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Almen, Nederland</span></div>
-                <div class="contact-item"><i class="fas fa-birthday-cake"></i><span>1 januari 2005</span></div>
-            </div>
-        </div>
-    </header>
-
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">Over mij</h2>
-            <div class="card">
-                <p>Ik ben Mohammad Janoudi, een gemotiveerde en gedisciplineerde persoon die met plezier en toewijding werkt. Ik werk snel, netjes en efficiënt, en kan goed presteren onder druk. Daarnaast ben ik klantvriendelijk, sociaal en help ik anderen graag om samen het beste resultaat te bereiken.
-
-Ik streef ernaar mezelf continu te verbeteren en nieuwe vaardigheden te leren, zowel op professioneel als persoonlijk vlak. Buiten mijn werk houd ik me graag bezig met design, video-editing met Adobe Premiere Pro en het ontwikkelen van nieuwe creatieve ideeën.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Werkervaring</h2>
-            <div class="timeline">
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">2023-2025</div>
-                    <div class="timeline-content">
-                        <h3>Servicemedewerker / Beveiliger — 1Alert</h3>
-                        <p><strong>aug 2023 - 2025</strong></p>
-                        <p>Verantwoordelijk voor veiligheid, klantenservice en toezicht. Ontwikkelen van communicatieve vaardigheden en verantwoordelijkheidsgevoel.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2020-2023</div>
-                    <div class="timeline-content">
-                        <h3>Hulpkracht — McDonald’s, Zutphen</h3>
-                        <p><strong>jan 2020 - jan 2023</strong></p>
-                        <p>Werkervaring opgedaan in teamwerk, efficiëntie en klantgerichtheid.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2018-2020</div>
-                    <div class="timeline-content">
-                        <h3>Vakkenvuller — Action</h3>
-                        <p><strong>2018 - sep 2020</strong></p>
-                        <p>Assistentie bij winkelbeheer en klanttevredenheid.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Vaardigheden</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Technische Vaardigheden</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>PHP</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>WordPress</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Bootstrap</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Laravel</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 75%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Design & Tools</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Adobe Photoshop</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Adobe Premiere Pro</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 70%"></div>
-                        </div>
-                    </div>
-                     <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Tailwind</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>C#</span>
-                            <span>40%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 40%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>ICT</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 95%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="languages">
-        <div class="container">
-            <h2 class="section-title">Talen</h2>
-            <div class="languages-container">
-                <div class="language-item">
-                    <div class="language-circle">
-                        <span>95%</span>
-                    </div>
-                    <h3>Nederlands</h3>
-                    <p>Vloeiend</p>
-                </div>
-                <div class="language-item">
-                    <div class="language-circle" style="background: conic-gradient(var(--secondary) 0% 80%, var(--light) 80% 100%);">
-                        <span>80%</span>
-                    </div>
-                    <h3>Engels</h3>
-                    <p>Goed</p>
-                </div>
-                <div class="language-item">
-                    <div class="language-circle" style="background: conic-gradient(var(--secondary) 0% 95%, var(--light) 95% 100%);">
-                        <span>95%</span>
-                    </div>
-                    <h3>Arabisch</h3>
-                    <p>Vloeiend</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cv">
-        <div class="container">
-            <h2 class="section-title">Curriculum Vitae</h2>
-            <div class="card">
-                <h3>Opleiding</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2021-heden</div>
-                        <div class="timeline-content">
-                            <h4>Software Development</h4>
-                            <p>ROC Rijnijssel, Arnhem</p>
-                            <p>Focus op webdevelopment en programmeertalen</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <h3 style="margin-top: 30px;">Certificeringen</h3>
-                <ul style="list-style-type: none; padding-left: 20px;">
-                    <li style="margin-bottom: 10px;"><i class="fas fa-certificate" style="color: var(--secondary); margin-right: 10px;"></i> WordPress Development</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-certificate" style="color: var(--secondary); margin-right: 10px;"></i> PHP Fundamentals</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-certificate" style="color: var(--secondary); margin-right: 10px;"></i> Responsive Web Design</li>
-                </ul>
-                
-              
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Mohammad Janoudi. Alle rechten voorbehouden.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </footer>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
-        // Animate skill bars on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const skillBars = document.querySelectorAll('.skill-level');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const skillLevel = entry.target;
-                        const width = skillLevel.style.width;
-                        skillLevel.style.width = '0';
-                        setTimeout(() => {
-                            skillLevel.style.width = width;
-                        }, 300);
-                        observer.unobserve(skillLevel);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vexoxGreen: '#2f7f7a',
+                        vexoxGold: '#b79a6b',
                     }
-                });
-            }, { threshold: 0.5 });
-            
-            skillBars.forEach(bar => {
-                observer.observe(bar);
-            });
-        });
+                }
+            }
+        }
     </script>
+</head>
+<body class="bg-white text-gray-800">
+
+<!-- NAVBAR -->
+<header class="w-full border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+            <img src="image/1plain.png" alt="VEXOX logo" class="w-10">
+            <span class="text-xl font-semibold tracking-wide">VEXOX</span>
+        </div>
+
+        <!-- Desktop menu -->
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="#" class="hover:text-vexoxGreen transition">Home</a>
+            <a href="#" class="hover:text-vexoxGreen transition">Services</a>
+            <a href="#" class="hover:text-vexoxGreen transition">About</a>
+            <a href="#" class="hover:text-vexoxGreen transition">Contact</a>
+        </nav>
+
+        <!-- CTA -->
+        <a href="#" class="hidden md:inline-block px-5 py-2 bg-vexoxGreen text-white rounded-lg hover:opacity-90 transition">
+            Get Started
+        </a>
+
+        <!-- Mobile button -->
+        <button id="menuBtn" class="md:hidden text-2xl">
+            ☰
+        </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-6">
+        <nav class="flex flex-col gap-4">
+            <a href="#" class="hover:text-vexoxGreen">Home</a>
+            <a href="#" class="hover:text-vexoxGreen">Services</a>
+            <a href="#" class="hover:text-vexoxGreen">About</a>
+            <a href="#" class="hover:text-vexoxGreen">Contact</a>
+            <a href="#" class="mt-2 px-5 py-2 bg-vexoxGreen text-white rounded-lg text-center">
+                Get Started
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="min-h-[calc(100vh-80px)] flex flex-col justify-center items-center px-6 text-center">
+
+    <img src="image/xv_centerdin.png" alt="VEXOX logo" class="w-48 md:w-64 mb-8">
+
+    <h1 class="text-3xl md:text-5xl font-semibold tracking-wide mb-4">
+        Welcome to <span class="text-vexoxGreen">VEXOX</span>
+    </h1>
+
+    <p class="max-w-xl text-gray-600 text-base md:text-lg mb-8">
+        Professional solutions with a strong identity.  
+        Built for clarity, trust and growth.
+    </p>
+
+    <div class="flex gap-4">
+        <a href="#" class="px-6 py-3 bg-vexoxGreen text-white rounded-lg hover:opacity-90 transition">
+            Get Started
+        </a>
+        <a href="#" class="px-6 py-3 border border-vexoxGold text-vexoxGold rounded-lg hover:bg-vexoxGold hover:text-white transition">
+            Learn More
+        </a>
+    </div>
+
+</section>
+
+<!-- Mobile menu script -->
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
+
 </body>
 </html>
