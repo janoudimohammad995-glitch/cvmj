@@ -132,6 +132,71 @@
             z-index: -1;
         }
         
+        /* Question section */
+        .question-section {
+            margin: 40px 0 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .question-text {
+            font-size: 2.5rem;
+            color: #ffd6d6;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .forgiveness-btn {
+            padding: 18px 45px;
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .yes-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: 3px solid #81C784;
+        }
+        
+        .yes-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #66BB6A, #388E3C);
+        }
+        
+        .no-btn {
+            background: linear-gradient(135deg, #f44336, #c62828);
+            color: white;
+            border: 3px solid #ef9a9a;
+            position: relative;
+            transition: transform 0.1s ease;
+        }
+        
+        .no-btn:hover {
+            background: linear-gradient(135deg, #ef5350, #d32f2f);
+        }
+        
+        .no-btn.running {
+            animation: runAway 0.5s ease-out;
+        }
+        
         .message-details {
             background: rgba(255, 255, 255, 0.08);
             padding: 25px;
@@ -173,6 +238,58 @@
             animation: fall linear infinite;
             animation-duration: var(--duration);
             animation-delay: var(--delay);
+        }
+        
+        /* Success message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border: 2px solid #4CAF50;
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .success-message h2 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .success-message p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .success-message .close-btn {
+            padding: 12px 30px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            display: none;
         }
         
         /* Animations */
@@ -220,6 +337,33 @@
             }
         }
         
+        @keyframes runAway {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(50px);
+            }
+            50% {
+                transform: translateX(-40px);
+            }
+            75% {
+                transform: translateX(60px);
+            }
+            100% {
+                transform: translateX(-100px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
@@ -228,6 +372,15 @@
             
             .apology-text {
                 font-size: 2.5rem;
+            }
+            
+            .question-text {
+                font-size: 2rem;
+            }
+            
+            .forgiveness-btn {
+                padding: 15px 35px;
+                font-size: 1.5rem;
             }
             
             .rose {
@@ -249,8 +402,17 @@
                 font-size: 1.8rem;
             }
             
-            .apology-translation {
-                font-size: 1.1rem;
+            .question-text {
+                font-size: 1.6rem;
+            }
+            
+            .forgiveness-btn {
+                padding: 12px 30px;
+                font-size: 1.3rem;
+            }
+            
+            .buttons-container {
+                gap: 20px;
             }
             
             .roses-container {
@@ -271,10 +433,17 @@
 <body>
     <div class="petals-container" id="petals-container"></div>
     
+    <!-- Success message overlay -->
+    <div class="overlay" id="overlay"></div>
+    <div class="success-message" id="successMessage">
+        <h2><i class="fas fa-heart"></i> الحمدلله!</h2>
+        <p>هييييك ها دخيلو الي بسامحني</p>
+        <button class="close-btn" id="closeSuccessBtn">إغلاق</button>
+    </div>
+    
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-heart heart"></i> من القلب إلى القلب <i class="fas fa-heart heart"></i></h1>
-           
         </div>
         
         <div class="message-box">
@@ -297,12 +466,19 @@
                     <i class="fas fa-spa"></i>
                 </div>
             </div>
-          
+            
+            <!-- Question section -->
+            <div class="question-section">
+                <div class="question-text">سامحتيني؟</div>
+                <div class="buttons-container">
+                    <button class="forgiveness-btn yes-btn" id="yesBtn">اي</button>
+                    <button class="forgiveness-btn no-btn" id="noBtn">لا</button>
+                </div>
+            </div>
         </div>
         
         <div class="footer">
-            <p>بكل الحب والاحترام... <i class="fas fa-heart heart" style="font-size: 1rem;"></i></p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">هذه الصفحة تتحرك بتأثيرات الورد للاعتذار الخالص</p>
+          
         </div>
     </div>
 
@@ -381,6 +557,225 @@
         
         // Start typing effect after a short delay
         setTimeout(typeEffect, 1000);
+        
+        // Interactive forgiveness buttons
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const successMessage = document.getElementById('successMessage');
+        const overlay = document.getElementById('overlay');
+        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+        
+        // Track how many times "لا" has been hovered/clicked
+        let noButtonInteractions = 0;
+        
+        // When "لا" button is hovered or clicked, make it move away
+        noBtn.addEventListener('mouseover', function() {
+            noButtonInteractions++;
+            
+            // Add running animation class
+            noBtn.classList.add('running');
+            
+            // Calculate a random position to move to
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Remove the class after animation completes to reset
+            setTimeout(() => {
+                noBtn.classList.remove('running');
+            }, 500);
+            
+            // After a few attempts, change the button text
+            if (noButtonInteractions >= 3) {
+                noBtn.textContent = "ما على كيفك كبسي الاخضر";
+            }
+            
+            // Play a sound effect (optional)
+            playButtonSound();
+        });
+        
+        // When "لا" button is clicked (if they manage to click it)
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Make it run away again
+            noBtn.classList.add('running');
+            
+            // Change text to be more persuasive
+            noBtn.textContent = "ما على كيفك كبسي الاخضر";
+            
+            // Show a message encouraging to click "اي"
+            if (noButtonInteractions < 5) {
+                showEncouragementMessage();
+            }
+            
+            // Remove the class after animation completes
+            setTimeout(() => {
+                noBtn.classList.remove('running');
+            }, 500);
+            
+            playButtonSound();
+        });
+        
+        // When "اي" button is clicked
+        yesBtn.addEventListener('click', function() {
+            // Create celebration effect
+            createCelebration();
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            overlay.style.display = 'block';
+            
+            // Play celebration sound (optional)
+            playCelebrationSound();
+        });
+        
+        // Close success message
+        closeSuccessBtn.addEventListener('click', function() {
+            successMessage.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+        
+        // Close success message when clicking overlay
+        overlay.addEventListener('click', function() {
+            successMessage.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+        
+        // Function to create celebration effect
+        function createCelebration() {
+            // Create extra roses
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const rose = document.createElement('div');
+                    rose.classList.add('rose');
+                    rose.style.position = 'fixed';
+                    rose.style.left = `${Math.random() * 90}vw`;
+                    rose.style.top = `${Math.random() * 90}vh`;
+                    rose.style.zIndex = '20';
+                    rose.style.animation = 'float 2s ease-in-out';
+                    
+                    const icon = document.createElement('i');
+                    icon.classList.add('fas', 'fa-heart');
+                    icon.style.color = `hsl(${Math.random() * 60 + 320}, 100%, 65%)`;
+                    icon.style.fontSize = '3rem';
+                    
+                    rose.appendChild(icon);
+                    document.body.appendChild(rose);
+                    
+                    // Remove after animation completes
+                    setTimeout(() => {
+                        rose.remove();
+                    }, 2000);
+                }, i * 200);
+            }
+            
+            // Create extra petals
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.classList.add('petal');
+                    petal.style.position = 'fixed';
+                    petal.style.width = `${Math.random() * 20 + 10}px`;
+                    petal.style.height = petal.style.width;
+                    petal.style.left = `${Math.random() * 100}vw`;
+                    petal.style.top = '-30px';
+                    petal.style.zIndex = '20';
+                    petal.style.background = `linear-gradient(135deg, hsl(${Math.random() * 60 + 320}, 100%, 70%), hsl(${Math.random() * 60 + 320}, 100%, 60%))`;
+                    petal.style.setProperty('--duration', `${Math.random() * 5 + 5}s`);
+                    
+                    document.body.appendChild(petal);
+                    
+                    // Remove after animation completes
+                    setTimeout(() => {
+                        petal.remove();
+                    }, 6000);
+                }, i * 100);
+            }
+        }
+        
+        // Function to show encouragement message
+        function showEncouragementMessage() {
+            // Create a temporary encouragement message
+            const encouragement = document.createElement('div');
+            encouragement.textContent = "من فضلكِ سامحيني 🌹";
+            encouragement.style.position = 'fixed';
+            encouragement.style.top = '20%';
+            encouragement.style.left = '50%';
+            encouragement.style.transform = 'translateX(-50%)';
+            encouragement.style.background = 'rgba(0, 0, 0, 0.8)';
+            encouragement.style.color = '#ffd6d6';
+            encouragement.style.padding = '15px 25px';
+            encouragement.style.borderRadius = '50px';
+            encouragement.style.zIndex = '100';
+            encouragement.style.fontSize = '1.2rem';
+            encouragement.style.border = '2px solid #ff4d6d';
+            encouragement.style.animation = 'fadeIn 0.3s ease-out';
+            
+            document.body.appendChild(encouragement);
+            
+            // Remove after 2 seconds
+            setTimeout(() => {
+                encouragement.style.animation = 'fadeIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    encouragement.remove();
+                }, 300);
+            }, 2000);
+        }
+        
+        // Function to play button sound (using simple beep)
+        function playButtonSound() {
+            try {
+                // Create a simple beep sound
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 300 + (noButtonInteractions * 50);
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                console.log("Audio not supported");
+            }
+        }
+        
+        // Function to play celebration sound
+        function playCelebrationSound() {
+            try {
+                // Create a celebration sound
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Play multiple tones for celebration
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = 400 + (i * 100);
+                        oscillator.type = 'sine';
+                        
+                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                        
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.3);
+                    }, i * 100);
+                }
+            } catch (e) {
+                console.log("Audio not supported");
+            }
+        }
     </script>
 </body>
 </html>
