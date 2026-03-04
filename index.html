@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love You Wasan</title>
+<title>Love you Wasan</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -12,13 +12,24 @@
 
 body{
 background:black;
-overflow:hidden;
 margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+overflow:hidden;
+font-family:sans-serif;
 }
 
-.love{
+#ui{
+position:relative;
+width:min(90vw,500px);
+height:min(90vw,500px);
+}
+
+.love_word{
 position:absolute;
-color:#ff9bb3;
+color:#ff9bc2;
 font-weight:600;
 white-space:nowrap;
 
@@ -26,67 +37,78 @@ text-shadow:
 0 0 5px #ff7aa2,
 0 0 10px #ff7aa2,
 0 0 20px #ff7aa2,
-0 0 40px #ff7aa2;
+0 0 30px #ff7aa2;
 
-animation: float 6s linear infinite;
+letter-spacing:2px;
+transform:translate(-50%,-50%) rotate(-30deg);
+animation: move 6s ease-in-out infinite alternate;
 }
 
-@keyframes float{
+@keyframes move{
+
 0%{
-opacity:0;
-transform: translateY(10px);
+transform:translate(-50%,-50%) rotate(-30deg) translateX(-8px);
 }
-50%{
-opacity:1;
-}
+
 100%{
-opacity:0;
-transform: translateY(-10px);
+transform:translate(-50%,-50%) rotate(-30deg) translateX(8px);
 }
+
 }
 
 </style>
 
 </head>
 
-<body class="flex items-center justify-center min-h-screen">
+<body>
 
-<div id="heart" class="relative w-[90vw] h-[90vw] max-w-[500px] max-h-[500px]"></div>
+<div id="ui"></div>
 
 <script>
 
-const container = document.getElementById("heart");
+function drawHeart(){
 
-const size = container.offsetWidth;
+const ui = document.getElementById("ui");
+ui.innerHTML="";
 
-const scale = size / 40;
-const offsetX = size / 2;
-const offsetY = size / 2;
+const size = ui.clientWidth;
 
-const fontSize = size / 25;
+const scale = size/40;
+const centerX = size/2;
+const centerY = size/2;
 
-for(let t = 0; t < Math.PI * 2; t += 0.05){
+const fontSize = size/25;
 
-let x = 16 * Math.pow(Math.sin(t),3);
-let y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+for(let i=0;i<90;i++){
 
-x = x * scale + offsetX;
-y = -y * scale + offsetY;
+let t = i/90 * Math.PI*2;
 
-const text = document.createElement("div");
+let x = 16*Math.pow(Math.sin(t),3);
+let y = 13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
 
-text.className = "love";
-text.innerText = "Love you Wasan";
+x = x*scale + centerX;
+y = -y*scale + centerY;
 
-text.style.left = x + "px";
-text.style.top = y + "px";
-text.style.fontSize = fontSize + "px";
+const el = document.createElement("div");
 
-text.style.animationDelay = Math.random() * 5 + "s";
+el.className="love_word";
+el.innerText="Love you Wasan";
 
-container.appendChild(text);
+el.style.left = x + "px";
+el.style.top = y + "px";
+el.style.fontSize = fontSize + "px";
+
+el.style.animationDelay = (i * -0.25) + "s";
+
+ui.appendChild(el);
 
 }
+
+}
+
+drawHeart();
+
+window.addEventListener("resize", drawHeart);
 
 </script>
 
