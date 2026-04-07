@@ -1,1 +1,459 @@
 
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV – Mohammad Janoudi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #00ff87;
+      --accent2: #00c9ff;
+      --accent3: #ff6b6b;
+      --dark: #060b18;
+      --card: #0d1526;
+      --card2: #111e35;
+      --border: #1a2844;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--dark);
+      color: #e2e8f0;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    /* CURSOR */
+    #cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.2s, height 0.2s;
+      box-shadow: 0 0 10px var(--accent), 0 0 20px rgba(0,255,135,0.4);
+    }
+    #cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(0,255,135,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width 0.3s, height 0.3s;
+    }
+    /* GRID */
+    .grid-overlay {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,135,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,135,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none; z-index: 1;
+    }
+    /* TYPOGRAPHY */
+    .heading-font { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.06em; }
+    .mono { font-family: 'Space Mono', monospace; }
+    /* GLITCH */
+    .glitch-wrap { position: relative; display: inline-block; }
+    .glitch-wrap::before,.glitch-wrap::after {
+      content: attr(data-text); position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.06em; font-size: inherit; line-height: inherit;
+    }
+    .glitch-wrap::before { color: var(--accent2); animation: glitch1 6s infinite; clip-path: polygon(0 20%,100% 20%,100% 40%,0 40%); }
+    .glitch-wrap::after  { color: var(--accent3); animation: glitch2 6s infinite; clip-path: polygon(0 60%,100% 60%,100% 80%,0 80%); }
+    @keyframes glitch1 { 0%,90%,100%{transform:translate(0);opacity:0} 92%{transform:translate(-3px,1px);opacity:0.7} 94%{transform:translate(3px,-1px);opacity:0.7} 96%{transform:translate(0);opacity:0} }
+    @keyframes glitch2 { 0%,90%,100%{transform:translate(0);opacity:0} 93%{transform:translate(3px,2px);opacity:0.6} 95%{transform:translate(-2px,-1px);opacity:0.6} 97%{transform:translate(0);opacity:0} }
+    /* NEON */
+    .neon-green { color: var(--accent); text-shadow: 0 0 8px rgba(0,255,135,0.6), 0 0 20px rgba(0,255,135,0.3); }
+    .neon-blue  { color: var(--accent2); text-shadow: 0 0 8px rgba(0,201,255,0.5), 0 0 20px rgba(0,201,255,0.2); }
+    /* ACCENT LINE */
+    .accent-line {
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+      border-radius: 2px; position: relative; overflow: hidden;
+    }
+    .accent-line::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer { to { left: 150%; } }
+    /* CARD */
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: rgba(0,255,135,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,255,135,0.05); }
+    .card:hover::before { transform: scaleX(1); }
+    .card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 16px; height: 16px; border-bottom: 2px solid rgba(0,255,135,0.12); border-right: 2px solid rgba(0,255,135,0.12); border-radius: 0 0 6px 0; }
+    /* SKILL PILL */
+    .skill-pill {
+      background: rgba(0,255,135,0.06); border: 1px solid rgba(0,255,135,0.2);
+      color: var(--accent); font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; padding: 3px 10px; border-radius: 2px;
+      display: inline-block; transition: all 0.2s; position: relative; overflow: hidden;
+    }
+    .skill-pill::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent);
+      transition: left 0.4s;
+    }
+    .skill-pill:hover::before { left: 100%; }
+    .skill-pill:hover { background: rgba(0,255,135,0.15); box-shadow: 0 0 16px rgba(0,255,135,0.25); color: #fff; }
+    /* TAG */
+    .tag-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; }
+    /* PROGRESS */
+    .progress-track { background: rgba(255,255,255,0.05); border-radius: 2px; height: 4px; overflow: hidden; }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; width: 0%; transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+    }
+    .progress-fill::after { content: ''; position: absolute; right: 0; top: 0; width: 6px; height: 100%; background: white; border-radius: 50%; opacity: 0.8; box-shadow: 0 0 6px white; }
+    /* HOBBY */
+    .hobby-box {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 4px; padding: 10px 14px; display: flex; align-items: center;
+      gap: 10px; font-size: 0.82rem; transition: all 0.25s; position: relative; overflow: hidden;
+    }
+    .hobby-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent), var(--accent2)); transform: scaleY(0); transition: transform 0.25s; border-radius: 2px 0 0 2px; }
+    .hobby-box:hover { border-color: rgba(0,255,135,0.25); background: rgba(0,255,135,0.04); transform: translateX(4px); }
+    .hobby-box:hover::before { transform: scaleY(1); }
+    /* AWARD */
+    .award-badge { background: linear-gradient(135deg, rgba(0,255,135,0.1), rgba(0,201,255,0.06)); border: 1px solid rgba(0,255,135,0.25); border-radius: 6px; position: relative; overflow: hidden; }
+    .award-badge::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(0,255,135,0.08), transparent 60%); pointer-events: none; }
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* SCANLINE */
+    @keyframes scanline { 0% { top: -5%; } 100% { top: 105%; } }
+    .scanline { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent); pointer-events: none; animation: scanline 5s linear infinite; }
+    /* TYPING CURSOR */
+    .type-cursor::after { content: '|'; animation: blink 1s step-end infinite; color: var(--accent); margin-left: 2px; }
+    @keyframes blink { 50% { opacity: 0; } }
+    /* PULSE DOT */
+    .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; animation: pulse-anim 2s ease-in-out infinite; box-shadow: 0 0 8px var(--accent); }
+    @keyframes pulse-anim { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.6} }
+    /* FLOAT */
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .float-anim { animation: float 4s ease-in-out infinite; }
+    .float-anim2 { animation: float 4s ease-in-out 1.5s infinite; }
+    /* COUNTER */
+    .counter { font-family: 'Bebas Neue', sans-serif; }
+    /* GLOW CARD */
+    .glow-card { position: relative; }
+    .glow-card::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(135deg, rgba(0,255,135,0.3), rgba(0,201,255,0.2), transparent, rgba(0,255,135,0.1)); border-radius: 7px; z-index: -1; opacity: 0; transition: opacity 0.4s; }
+    .glow-card:hover::before { opacity: 1; }
+    /* PRINT */
+    @media print {
+      body { background: white; color: black; cursor: auto; }
+      #bg-canvas, .grid-overlay, #cursor, #cursor-ring, .scanline { display: none; }
+      .card { border: 1px solid #ddd; background: white; transform: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+<div class="grid-overlay"></div>
+
+<div class="relative z-10 max-w-4xl mx-auto px-4 py-12">
+
+  <!-- HEADER -->
+  <header class="mb-12 reveal">
+    <div class="relative card p-8 glow-card" style="overflow:visible;">
+      <div class="scanline"></div>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="pulse-dot"></div>
+        <span class="tag-label">// beschikbaar voor werk</span>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+        <div>
+          <p class="tag-label mb-3">curriculum vitae</p>
+          <h1 class="heading-font text-7xl md:text-8xl text-white leading-none">
+            <div class="glitch-wrap" data-text="Mohammad">Mohammad</div><br>
+            <div class="glitch-wrap neon-green" data-text="Janoudi">Janoudi</div>
+          </h1>
+          <div class="accent-line mt-5 w-56"></div>
+          <p class="mt-4 text-gray-400 text-sm mono type-cursor">Software Developer · Student · Bouwer</p>
+        </div>
+        <div style="background:var(--card2);border:1px solid var(--border);" class="rounded-lg p-5 min-w-[240px] space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="text-lg">🎂</span>
+            <div><p class="tag-label">leeftijd</p><p class="mono text-white font-bold text-lg" id="age-display">21</p></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg">🎓</span>
+            <div><p class="tag-label">opleiding</p><p class="text-sm text-gray-300">Software Development</p><p class="text-xs text-gray-500 mono">4e jaar · HBO</p></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg">📍</span>
+            <div><p class="tag-label">locatie</p><p class="text-sm text-gray-300">Nederland</p></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg">✉️</span>
+            <div><p class="tag-label">email</p><a href="mailto:janoudimohammad995@gmail.com" class="text-xs mono neon-green hover:underline break-all">janoudimohammad995@gmail.com</a></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg">📱</span>
+            <div><p class="tag-label">telefoon</p><a href="tel:+31620102430" class="text-sm text-gray-300 mono hover:text-white">06 20 10 24 30</a></div>
+          </div>
+        </div>
+      </div>
+      <!-- STATS -->
+      <div class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-gray-800">
+        <div class="text-center">
+          <p class="counter neon-green text-4xl" data-target="6">0</p>
+          <p class="tag-label mt-1">banen gehad</p>
+        </div>
+        <div class="text-center">
+          <p class="counter neon-blue text-4xl" data-target="4">0</p>
+          <p class="tag-label mt-1">jaar opleiding</p>
+        </div>
+        <div class="text-center">
+          <p class="counter text-4xl" style="color:var(--accent3);text-shadow:0 0 8px rgba(255,107,107,0.5);" data-target="1">0</p>
+          <p class="tag-label mt-1">hackathon gewonnen</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- GRID -->
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <!-- LEFT -->
+    <div class="md:col-span-2 space-y-5">
+
+      <section class="card p-6 glow-card reveal">
+        <p class="tag-label mb-3">// over mij</p>
+        <p class="text-gray-300 leading-relaxed text-sm">Ambitieuze 4e-jaars Software Development student met een brede technische achtergrond. Ik werk graag met moderne web-technologieën en ben constant bezig met leren en groeien — of dat nu achter een scherm is, in de sportschool, of met hardware in mijn handen. Ik ben een teamspeler die gedijt onder druk, zoals bewezen bij CodeFest.</p>
+      </section>
+
+      <section class="reveal">
+        <p class="tag-label mb-4">// werkervaring</p>
+        <div class="space-y-3">
+
+          <div class="card p-5 glow-card reveal" style="border-left:2px solid var(--accent);">
+            <div class="flex items-start justify-between gap-4">
+              <div><h3 class="text-white font-semibold">Stage · Software Developer</h3><p class="text-gray-500 text-xs mono mt-1">Intern — praktijkervaring</p></div>
+              <span class="skill-pill shrink-0">Stage</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-3 leading-relaxed">Praktijkervaring opgedaan in softwareontwikkeling in een professionele omgeving met echte projecten en deadlines.</p>
+            <div class="flex flex-wrap gap-2 mt-3"><span class="skill-pill">PHP</span><span class="skill-pill">Laravel</span><span class="skill-pill">Git</span></div>
+          </div>
+
+          <div class="card p-5 glow-card reveal">
+            <div class="flex items-start justify-between gap-4">
+              <div><h3 class="text-white font-semibold">Badmeester &amp; Zwembadtoezichthouder</h3><p class="text-gray-500 text-xs mono mt-1">Zwembad</p></div>
+              <span class="float-anim text-xl">🏊</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Toezicht houden op bezoekers, zorgen voor veiligheid in en rond het zwembad en assisteren bij noodgevallen.</p>
+          </div>
+
+          <div class="card p-5 glow-card reveal">
+            <div class="flex items-start justify-between gap-4">
+              <div><h3 class="text-white font-semibold">Beveiliger &amp; Toezichthouder</h3><p class="text-gray-500 text-xs mono mt-1">Beveiliging</p></div>
+              <span class="float-anim2 text-xl">🛡️</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Verantwoordelijk voor veiligheid en toezicht, proactief handelen bij incidenten en handhaven van regels.</p>
+          </div>
+
+          <div class="card p-5 glow-card reveal">
+            <div class="flex items-start justify-between gap-4">
+              <div><h3 class="text-white font-semibold">Vakkenvuller</h3><p class="text-gray-500 text-xs mono mt-1">Action</p></div>
+              <span class="float-anim text-xl">🛒</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Schappen bijvullen, voorraadbeheer en zorgen voor een nette winkelomgeving.</p>
+          </div>
+
+          <div class="card p-5 glow-card reveal">
+            <div class="flex items-start justify-between gap-4">
+              <div><h3 class="text-white font-semibold">Crew Member</h3><p class="text-gray-500 text-xs mono mt-1">McDonald's</p></div>
+              <span class="float-anim2 text-xl">🍔</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Werken in een snelle horeca-omgeving, klantenservice en samenwerken in teamverband onder tijdsdruk.</p>
+          </div>
+
+          <div class="card p-5 glow-card reveal">
+            <div class="flex items-start justify-between gap-4">
+              <div><h3 class="text-white font-semibold">Krantenbezorger</h3><p class="text-gray-500 text-xs mono mt-1">Bezorgdienst</p></div>
+              <span class="float-anim text-xl">📰</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Dagelijkse bezorging van kranten, zelfstandig werken en verantwoordelijkheid voor een eigen wijk.</p>
+          </div>
+
+          <div class="award-badge p-5 reveal">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl float-anim">🏆</span>
+              <div><h3 class="text-white font-semibold neon-green">CodeFest — Winnaar</h3><p class="text-gray-500 text-xs mono">24-uurs hackathon</p></div>
+            </div>
+            <p class="text-gray-300 text-sm leading-relaxed">Gewonnen bij CodeFest: een intensieve 24-uur durende programmeerwedstrijd waarbij teams van verschillende scholen samen een volledig project moesten bouwen en opleveren onder extreme tijdsdruk.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="card p-6 glow-card reveal">
+        <p class="tag-label mb-5">// technische vaardigheden</p>
+        <div class="space-y-5">
+          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">PHP &amp; Laravel</span><span class="mono text-xs neon-green">90%</span></div><div class="progress-track"><div class="progress-fill" data-width="90"></div></div></div>
+          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">SCSS &amp; Tailwind CSS</span><span class="mono text-xs neon-green">85%</span></div><div class="progress-track"><div class="progress-fill" data-width="85"></div></div></div>
+          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">WordPress</span><span class="mono text-xs neon-blue">80%</span></div><div class="progress-track"><div class="progress-fill" data-width="80"></div></div></div>
+          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Ubuntu Linux</span><span class="mono text-xs neon-blue">75%</span></div><div class="progress-track"><div class="progress-fill" data-width="75"></div></div></div>
+          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Adobe Creative Suite</span><span class="mono text-xs text-gray-400">70%</span></div><div class="progress-track"><div class="progress-fill" data-width="70"></div></div></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="space-y-5">
+
+      <section class="card p-5 glow-card reveal">
+        <p class="tag-label mb-3">// tech stack</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-pill">PHP</span><span class="skill-pill">Laravel</span><span class="skill-pill">SCSS</span><span class="skill-pill">Tailwind</span><span class="skill-pill">WordPress</span><span class="skill-pill">Linux</span><span class="skill-pill">Ubuntu</span><span class="skill-pill">Git</span><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span><span class="skill-pill">Adobe XD</span><span class="skill-pill">Photoshop</span>
+        </div>
+      </section>
+
+      <section class="card p-5 glow-card reveal">
+        <p class="tag-label mb-3">// opleiding</p>
+        <p class="text-white font-semibold text-sm">Software Development</p>
+        <p class="text-gray-500 text-xs mono mt-1 mb-3">HBO · 4e jaar</p>
+        <div class="flex gap-1 mb-1">
+          <div class="h-2 flex-1 rounded-sm" style="background:var(--accent);box-shadow:0 0 6px var(--accent);"></div>
+          <div class="h-2 flex-1 rounded-sm" style="background:var(--accent);box-shadow:0 0 6px var(--accent);"></div>
+          <div class="h-2 flex-1 rounded-sm" style="background:var(--accent);box-shadow:0 0 6px var(--accent);"></div>
+          <div class="h-2 flex-1 rounded-sm" style="background:var(--accent2);box-shadow:0 0 6px var(--accent2);"></div>
+          <div class="h-2 flex-1 rounded-sm bg-gray-700"></div>
+        </div>
+        <p class="text-xs text-gray-600 mono">Jaar 4 van 4</p>
+      </section>
+
+      <section class="card p-5 glow-card reveal">
+        <p class="tag-label mb-4">// certificaten</p>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3 p-2 rounded hover:bg-white hover:bg-opacity-5 transition-colors">
+            <div class="w-8 h-8 rounded flex items-center justify-center shrink-0" style="background:rgba(0,120,212,0.15);border:1px solid rgba(0,120,212,0.35);"><span class="text-sm">🪟</span></div>
+            <div><p class="text-white text-xs font-medium">MOS: Outlook Associate</p><p class="text-gray-500 text-xs mono">Office 2019</p></div>
+          </div>
+          <div class="flex items-start gap-3 p-2 rounded hover:bg-white hover:bg-opacity-5 transition-colors">
+            <div class="w-8 h-8 rounded flex items-center justify-center shrink-0" style="background:rgba(0,120,212,0.15);border:1px solid rgba(0,120,212,0.35);"><span class="text-sm">📄</span></div>
+            <div><p class="text-white text-xs font-medium">MOS: Word Associate</p><p class="text-gray-500 text-xs mono">Office 2019</p></div>
+          </div>
+          <div class="flex items-start gap-3 p-2 rounded hover:bg-white hover:bg-opacity-5 transition-colors">
+            <div class="w-8 h-8 rounded flex items-center justify-center shrink-0" style="background:rgba(0,120,212,0.15);border:1px solid rgba(0,120,212,0.35);"><span class="text-sm">📊</span></div>
+            <div><p class="text-white text-xs font-medium">MOS: PowerPoint Associate</p><p class="text-gray-500 text-xs mono">Office 2019</p></div>
+          </div>
+          <div class="pt-2 border-t border-gray-800">
+            <a href="https://www.credly.com/badges/801b9254-11e8-4c0b-9d9d-d6ca62f4aa5d" target="_blank" class="text-xs mono neon-green hover:underline">→ Verify via Credly</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="card p-5 glow-card reveal">
+        <p class="tag-label mb-4">// talen</p>
+        <div class="space-y-4">
+          <div><div class="flex justify-between mb-1"><span class="text-sm text-gray-300">Nederlands</span><span class="mono text-xs text-gray-500">Vloeiend</span></div><div class="progress-track"><div class="progress-fill" data-width="95"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span class="text-sm text-gray-300">Arabisch</span><span class="mono text-xs text-gray-500">Moedertaal</span></div><div class="progress-track"><div class="progress-fill" data-width="100"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span class="text-sm text-gray-300">Engels</span><span class="mono text-xs text-gray-500">Goed</span></div><div class="progress-track"><div class="progress-fill" data-width="80"></div></div></div>
+        </div>
+      </section>
+
+      <section class="card p-5 glow-card reveal">
+        <p class="tag-label mb-3">// hobbies</p>
+        <div class="space-y-2">
+          <div class="hobby-box"><span>💪</span><span class="text-sm text-gray-300">Bodybuilding</span></div>
+          <div class="hobby-box"><span>🎮</span><span class="text-sm text-gray-300">Gamen</span></div>
+          <div class="hobby-box"><span>📚</span><span class="text-sm text-gray-300">Lezen</span></div>
+          <div class="hobby-box"><span>💻</span><span class="text-sm text-gray-300">Programmeren</span></div>
+          <div class="hobby-box"><span>🔧</span><span class="text-sm text-gray-300">Hardware fixen</span></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-gray-800 pt-6 flex items-center justify-between reveal">
+    <p class="mono text-xs text-gray-600">© <span id="year"></span> Mohammad Janoudi</p>
+    <div class="accent-line w-24"></div>
+    <p class="mono text-xs neon-green">v<span id="cv-year"></span>.1</p>
+  </footer>
+
+</div>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.skill-pill,.hobby-box,.card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='52px';ring.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+});
+
+// PARTICLES
+const canvas=document.getElementById('bg-canvas');
+const ctx=canvas.getContext('2d');
+function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+resize(); window.addEventListener('resize',resize);
+class P{
+  constructor(){ this.reset(); }
+  reset(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.s=Math.random()*1.5+0.3; this.vx=(Math.random()-.5)*.3; this.vy=(Math.random()-.5)*.3; this.o=Math.random()*.4+.1; this.c=Math.random()>.6?'#00ff87':Math.random()>.5?'#00c9ff':'#ffffff'; }
+  update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height)this.reset(); }
+  draw(){ ctx.save(); ctx.globalAlpha=this.o; ctx.fillStyle=this.c; ctx.shadowColor=this.c; ctx.shadowBlur=4; ctx.beginPath(); ctx.arc(this.x,this.y,this.s,0,Math.PI*2); ctx.fill(); ctx.restore(); }
+}
+const ps=Array.from({length:120},()=>new P());
+(function anim(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<ps.length;i++){
+    for(let j=i+1;j<ps.length;j++){
+      const dx=ps[i].x-ps[j].x,dy=ps[i].y-ps[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){ ctx.save(); ctx.globalAlpha=(1-d/100)*.07; ctx.strokeStyle='#00ff87'; ctx.lineWidth=.5; ctx.beginPath(); ctx.moveTo(ps[i].x,ps[i].y); ctx.lineTo(ps[j].x,ps[j].y); ctx.stroke(); ctx.restore(); }
+    }
+    ps[i].update(); ps[i].draw();
+  }
+  requestAnimationFrame(anim);
+})();
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),80); obs.unobserve(e.target); } }),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// PROGRESS BARS
+setTimeout(()=>{ document.querySelectorAll('.progress-fill').forEach(b=>b.style.width=b.dataset.width+'%'); },500);
+
+// COUNTERS
+const cobs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting){ const el=e.target,t=parseInt(el.dataset.target); let c=0,step=t/30; const tm=setInterval(()=>{ c=Math.min(c+step,t); el.textContent=Math.floor(c); if(c>=t)clearInterval(tm); },40); cobs.unobserve(el); } }),{threshold:0.5});
+document.querySelectorAll('.counter[data-target]').forEach(el=>cobs.observe(el));
+
+// AGE
+const BY=2004,BM=0;
+function age(){ const t=new Date(); let a=t.getFullYear()-BY; if(!(t.getMonth()>BM||(t.getMonth()===BM&&t.getDate()>=1)))a--; return a; }
+document.getElementById('age-display').textContent=age();
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('cv-year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
