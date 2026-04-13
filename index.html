@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -25,7 +24,7 @@
       font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
-      cursor: none;
+      cursor: auto;
     }
     /* CURSOR */
     #cursor {
@@ -165,8 +164,6 @@
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
 <canvas id="bg-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
 <div class="grid-overlay"></div>
 
@@ -197,7 +194,7 @@
           </div>
           <div class="flex items-center gap-3">
             <span class="text-lg">🎓</span>
-            <div><p class="tag-label">opleiding</p><p class="text-sm text-gray-300">Software Development</p><p class="text-xs text-gray-500 mono">4e jaar · HBO</p></div>
+            <div><p class="tag-label">opleiding</p><p class="text-sm text-gray-300">Software Development</p><p class="text-xs text-gray-500 mono">4e jaar · MBO · Rijnijssel</p></div>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-lg">📍</span>
@@ -239,7 +236,7 @@
 
       <section class="card p-6 glow-card reveal">
         <p class="tag-label mb-3">// over mij</p>
-        <p class="text-gray-300 leading-relaxed text-sm">Ambitieuze 4e-jaars Software Development student met een brede technische achtergrond. Ik werk graag met moderne web-technologieën en ben constant bezig met leren en groeien — of dat nu achter een scherm is, in de sportschool, of met hardware in mijn handen. Ik ben een teamspeler die gedijt onder druk, zoals bewezen bij CodeFest.</p>
+        <p class="text-gray-300 leading-relaxed text-sm">Ambitieuze MBO Software Development student met een brede technische achtergrond. Ik werk graag met moderne web-technologieën en ben constant bezig met leren en groeien — of dat nu achter een scherm is, in de sportschool, of met hardware in mijn handen. Ik ben een teamspeler die gedijt onder druk, zoals bewezen bij CodeFest.</p>
       </section>
 
       <section class="reveal">
@@ -251,8 +248,8 @@
               <div><h3 class="text-white font-semibold">Stage · Software Developer</h3><p class="text-gray-500 text-xs mono mt-1">Intern — praktijkervaring</p></div>
               <span class="skill-pill shrink-0">Stage</span>
             </div>
-            <p class="text-gray-400 text-sm mt-3 leading-relaxed">Praktijkervaring opgedaan in softwareontwikkeling in een professionele omgeving met echte projecten en deadlines.</p>
-            <div class="flex flex-wrap gap-2 mt-3"><span class="skill-pill">PHP</span><span class="skill-pill">Laravel</span><span class="skill-pill">Git</span></div>
+            <p class="text-gray-400 text-sm mt-3 leading-relaxed">Meerdere websites ontworpen en gebouwd voor klanten — van wireframes en designs in Figma tot volledige realisatie met PHP en WordPress.</p>
+            <div class="flex flex-wrap gap-2 mt-3"><span class="skill-pill">Figma</span><span class="skill-pill">PHP</span><span class="skill-pill">WordPress</span><span class="skill-pill">Git</span></div>
           </div>
 
           <div class="card p-5 glow-card reveal">
@@ -308,12 +305,15 @@
 
       <section class="card p-6 glow-card reveal">
         <p class="tag-label mb-5">// technische vaardigheden</p>
-        <div class="space-y-5">
-          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">PHP &amp; Laravel</span><span class="mono text-xs neon-green">90%</span></div><div class="progress-track"><div class="progress-fill" data-width="90"></div></div></div>
-          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">SCSS &amp; Tailwind CSS</span><span class="mono text-xs neon-green">85%</span></div><div class="progress-track"><div class="progress-fill" data-width="85"></div></div></div>
-          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">WordPress</span><span class="mono text-xs neon-blue">80%</span></div><div class="progress-track"><div class="progress-fill" data-width="80"></div></div></div>
-          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Ubuntu Linux</span><span class="mono text-xs neon-blue">75%</span></div><div class="progress-track"><div class="progress-fill" data-width="75"></div></div></div>
-          <div><div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Adobe Creative Suite</span><span class="mono text-xs text-gray-400">70%</span></div><div class="progress-track"><div class="progress-fill" data-width="70"></div></div></div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-pill">PHP &amp; Laravel</span>
+          <span class="skill-pill">SCSS &amp; Tailwind CSS</span>
+          <span class="skill-pill">WordPress</span>
+          <span class="skill-pill">Ubuntu Linux</span>
+          <span class="skill-pill">Adobe Creative Suite</span>
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">HTML &amp; CSS</span>
         </div>
       </section>
     </div>
@@ -331,7 +331,8 @@
       <section class="card p-5 glow-card reveal">
         <p class="tag-label mb-3">// opleiding</p>
         <p class="text-white font-semibold text-sm">Software Development</p>
-        <p class="text-gray-500 text-xs mono mt-1 mb-3">HBO · 4e jaar</p>
+        <p class="text-gray-500 text-xs mono mt-1">MBO · 4e jaar</p>
+        <p class="text-gray-500 text-xs mono mb-3">Rijnijssel</p>
         <div class="flex gap-1 mb-1">
           <div class="h-2 flex-1 rounded-sm" style="background:var(--accent);box-shadow:0 0 6px var(--accent);"></div>
           <div class="h-2 flex-1 rounded-sm" style="background:var(--accent);box-shadow:0 0 6px var(--accent);"></div>
@@ -395,23 +396,6 @@
 </div>
 
 <script>
-// CURSOR
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
-});
-(function animRing(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(animRing);
-})();
-document.querySelectorAll('a,button,.skill-pill,.hobby-box,.card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='52px';ring.style.height='52px';});
-  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
-});
 
 // PARTICLES
 const canvas=document.getElementById('bg-canvas');
@@ -449,7 +433,7 @@ const cobs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isInterse
 document.querySelectorAll('.counter[data-target]').forEach(el=>cobs.observe(el));
 
 // AGE
-const BY=2004,BM=0;
+const BY=2004,BM=5;
 function age(){ const t=new Date(); let a=t.getFullYear()-BY; if(!(t.getMonth()>BM||(t.getMonth()===BM&&t.getDate()>=1)))a--; return a; }
 document.getElementById('age-display').textContent=age();
 document.getElementById('year').textContent=new Date().getFullYear();
